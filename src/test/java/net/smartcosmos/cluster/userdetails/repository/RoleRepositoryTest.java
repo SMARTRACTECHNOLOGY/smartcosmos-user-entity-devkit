@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -24,6 +25,7 @@ import static org.junit.Assert.*;
 @SpringApplicationConfiguration(classes = { UserDetailsPersistenceConfig.class, TestApplicationConfiguration.class})
 @ActiveProfiles("test")
 @WebAppConfiguration
+@ComponentScan
 @IntegrationTest({ "spring.cloud.config.enabled=false", "eureka.client.enabled:false" })
 public class RoleRepositoryTest {
 
