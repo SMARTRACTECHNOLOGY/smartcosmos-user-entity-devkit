@@ -1,13 +1,10 @@
 package net.smartcosmos.cluster.userdetails.repository;
 
-import static java.util.stream.Collectors.toSet;
-
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
 import javax.validation.ConstraintViolationException;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -22,6 +19,8 @@ import org.springframework.util.Assert;
 import net.smartcosmos.cluster.userdetails.domain.AuthorityEntity;
 import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
 import net.smartcosmos.cluster.userdetails.domain.UserEntity;
+
+import static java.util.stream.Collectors.toSet;
 
 @Component
 public class UserRepositoryImpl implements UserRepositoryCustom {
@@ -46,14 +45,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     public UserEntity persist(UserEntity entity) throws ConstraintViolationException, TransactionException {
         try {
             return userRepository.save(entity);
-        }
-        catch (TransactionException e) {
+        } catch (TransactionException e) {
             // we expect constraint violations to be the root cause for exceptions here,
             // so we throw this particular exception back to the caller
             if (ExceptionUtils.getRootCause(e) instanceof ConstraintViolationException) {
                 throw (ConstraintViolationException) ExceptionUtils.getRootCause(e);
-            }
-            else {
+            } else {
                 throw e;
             }
         }
@@ -82,7 +79,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
             Set<AuthorityEntity> authorities = new LinkedHashSet<>();
 
             UserEntity user = userOptional.get();
-            user.getRoles().stream().filter(RoleEntity::getActive).forEach(role -> authorities.addAll(role.getAuthorities()));
+            user.getRoles().stream()
+                .filter(RoleEntity::getActive)
+                .forEach(role -> authorities.addAll(role.getAuthorities()));
 
             return Optional.of(authorities);
         }
@@ -109,16 +108,18 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
     private Set<RoleEntity> getRoleEntities(UUID tenantId, Collection<String> roleNames) {
 
-        return roleNames.stream().map(roleName -> {
-            Optional<RoleEntity> role = roleRepository.findByTenantIdAndNameIgnoreCase(tenantId, roleName);
-            if (role.isPresent()) {
-                return role.get();
-            }
-            else {
-                String msg = String.format("Role '%s' does not exist", roleName);
-                throw new IllegalArgumentException(msg);
-            }
-        }).collect(toSet());
+        return roleNames
+            .stream()
+            .map(roleName -> {
+                Optional<RoleEntity> role = roleRepository.findByTenantIdAndNameIgnoreCase(tenantId, roleName);
+                if (role.isPresent()) {
+                    return role.get();
+                } else {
+                    String msg = String.format("Role '%s' does not exist", roleName);
+                    throw new IllegalArgumentException(msg);
+                }
+            })
+            .collect(toSet());
     }
 
     private Set<RoleEntity> initRoleEntities(UserEntity user) {

@@ -29,7 +29,7 @@ public class UuidUtil {
         }
 
         throw new IllegalArgumentException(
-                String.format("Provided URN '%s' does not match the required URN scheme '%s'", urn, "urn:{prefix}:uuid:{uuid}"));
+            String.format("Provided URN '%s' does not match the required URN scheme '%s'", urn, "urn:{prefix}:uuid:{uuid}"));
     }
 
     public static String getThingUrnFromUuid(UUID uuid) {
@@ -49,8 +49,15 @@ public class UuidUtil {
     }
 
     static String getPrefixUrnFromUuid(String prefix, UUID uuid) {
-        return new StringBuilder(URN_PREFIX).append(URN_SEPARATOR).append(prefix).append(URN_SEPARATOR).append(UUID_TYPE).append(URN_SEPARATOR)
-                .append(uuid.toString()).toString().toLowerCase();
+        return new StringBuilder(URN_PREFIX)
+            .append(URN_SEPARATOR)
+            .append(prefix)
+            .append(URN_SEPARATOR)
+            .append(UUID_TYPE)
+            .append(URN_SEPARATOR)
+            .append(uuid.toString())
+            .toString()
+            .toLowerCase();
     }
 
     public static UUID getNewUuid() {
@@ -58,8 +65,12 @@ public class UuidUtil {
         String baseUuidString = Generators.timeBasedGenerator().generate().toString();
         String[] parts = baseUuidString.split("-");
 
-        String sortedUuidString = new StringBuilder(36).append(parts[2]).append(parts[1]).append("-").append(parts[0].substring(0, 4)).append("-")
-                .append(parts[0].substring(4, 8)).append("-").append(parts[3]).append("-").append(parts[4]).toString();
+        String sortedUuidString = new StringBuilder(36)
+            .append(parts[2]).append(parts[1]).append("-")
+            .append(parts[0].substring(0, 4)).append("-")
+            .append(parts[0].substring(4, 8)).append("-")
+            .append(parts[3]).append("-")
+            .append(parts[4]).toString();
 
         return UUID.fromString(sortedUuidString);
     }

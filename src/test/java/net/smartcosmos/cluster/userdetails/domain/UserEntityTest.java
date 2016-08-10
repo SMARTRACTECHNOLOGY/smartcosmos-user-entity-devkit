@@ -1,10 +1,7 @@
 package net.smartcosmos.cluster.userdetails.domain;
 
-import static org.junit.Assert.*;
-
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -15,7 +12,10 @@ import org.junit.*;
 import net.smartcosmos.cluster.userdetails.rest.resrouce.UserPersistenceTestApplication;
 import net.smartcosmos.util.UuidUtil;
 
+import static org.junit.Assert.*;
+
 @org.springframework.boot.test.SpringApplicationConfiguration(classes = { UserPersistenceTestApplication.class })
+@SuppressWarnings("Duplicates")
 public class UserEntityTest {
 
     private static Validator validator;
@@ -42,8 +42,15 @@ public class UserEntityTest {
         Set<RoleEntity> roleEntities = new HashSet<>();
         roleEntities.add(adminRole);
 
-        UserEntity userEntity = UserEntity.builder().tenantId(UuidUtil.getNewUuid()).username("some name").emailAddress("timc@example.com")
-                .givenName("Tim").surname("Cross").password("PleaseChangeMeImmediately").roles(roleEntities).build();
+        UserEntity userEntity = UserEntity.builder()
+            .tenantId(UuidUtil.getNewUuid())
+            .username("some name")
+            .emailAddress("timc@example.com")
+            .givenName("Tim")
+            .surname("Cross")
+            .password("PleaseChangeMeImmediately")
+            .roles(roleEntities)
+            .build();
 
         Set<ConstraintViolation<UserEntity>> violationSet = validator.validate(userEntity);
 
