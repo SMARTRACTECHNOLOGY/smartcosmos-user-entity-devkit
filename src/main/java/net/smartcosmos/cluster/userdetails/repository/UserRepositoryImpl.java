@@ -36,6 +36,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @Lazy
     @Autowired
     public UserRepositoryImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -43,6 +44,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
     @Override
     public UserEntity persist(UserEntity entity) throws ConstraintViolationException, TransactionException {
+
         try {
             return userRepository.save(entity);
         } catch (TransactionException e) {
@@ -64,7 +66,9 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
         Optional<UserEntity> userOptional = userRepository.findByUsernameIgnoreCase(username);
 
-        if (userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())) {
+        if (userOptional.isPresent() && passwordEncoder.matches(password,
+                                                                userOptional.get()
+                                                                    .getPassword())) {
             return userOptional;
         }
 
@@ -79,7 +83,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
             Set<AuthorityEntity> authorities = new LinkedHashSet<>();
 
             UserEntity user = userOptional.get();
-            user.getRoles().stream()
+            user.getRoles()
+                .stream()
                 .filter(RoleEntity::getActive)
                 .forEach(role -> authorities.addAll(role.getAuthorities()));
 
@@ -123,6 +128,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     private Set<RoleEntity> initRoleEntities(UserEntity user) {
+
         Set<RoleEntity> roleEntities = user.getRoles();
 
         if (!Hibernate.isInitialized(roleEntities)) {

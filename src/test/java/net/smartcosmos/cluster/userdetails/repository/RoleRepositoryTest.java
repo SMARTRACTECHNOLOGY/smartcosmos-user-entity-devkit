@@ -1,26 +1,25 @@
 package net.smartcosmos.cluster.userdetails.repository;
 
-import net.smartcosmos.cluster.userdetails.UserDetailsPersistenceConfig;
-import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
-import net.smartcosmos.test.TestApplicationConfiguration;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.junit.*;
+import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import net.smartcosmos.cluster.userdetails.UserDetailsPersistenceConfig;
+import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
+import net.smartcosmos.test.TestApplicationConfiguration;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { UserDetailsPersistenceConfig.class, TestApplicationConfiguration.class})
+@SpringApplicationConfiguration(classes = { UserDetailsPersistenceConfig.class, TestApplicationConfiguration.class })
 @ActiveProfiles("test")
 @WebAppConfiguration
 public class RoleRepositoryTest {
@@ -40,7 +39,11 @@ public class RoleRepositoryTest {
 
         tenantId = UUID.randomUUID();
 
-        role = RoleEntity.builder().tenantId(tenantId).name(name).active(active).build();
+        role = RoleEntity.builder()
+            .tenantId(tenantId)
+            .name(name)
+            .active(active)
+            .build();
 
         role = repository.save(role);
 
@@ -59,7 +62,11 @@ public class RoleRepositoryTest {
         final String name = "authName";
         final Boolean active = true;
 
-        RoleEntity createRole = RoleEntity.builder().tenantId(tenantId).name(name).active(active).build();
+        RoleEntity createRole = RoleEntity.builder()
+            .tenantId(tenantId)
+            .name(name)
+            .active(active)
+            .build();
 
         RoleEntity persistRole = repository.save(createRole);
 
@@ -67,7 +74,8 @@ public class RoleRepositoryTest {
         assertEquals(tenantId, persistRole.getTenantId());
         assertEquals(active, persistRole.getActive());
         assertEquals(name, persistRole.getName());
-        assertTrue(persistRole.getAuthorities().isEmpty());
+        assertTrue(persistRole.getAuthorities()
+                       .isEmpty());
     }
 
     @Test
@@ -106,6 +114,7 @@ public class RoleRepositoryTest {
 
     @Test
     public void deleteByTenantIdAndId() throws Exception {
+
         List<RoleEntity> deleteList = repository.deleteByTenantIdAndId(tenantId, id);
         assertFalse(deleteList.isEmpty());
         assertTrue(deleteList.contains(role));

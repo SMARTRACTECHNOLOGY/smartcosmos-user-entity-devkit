@@ -15,7 +15,6 @@ import net.smartcosmos.util.UuidUtil;
 import static org.junit.Assert.*;
 
 @org.springframework.boot.test.SpringApplicationConfiguration(classes = { UserPersistenceTestApplication.class })
-@SuppressWarnings("Duplicates")
 public class UserEntityTest {
 
     private static Validator validator;
@@ -26,6 +25,7 @@ public class UserEntityTest {
 
     @BeforeClass
     public static void setUp() {
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
 
@@ -38,7 +38,9 @@ public class UserEntityTest {
     @Test
     public void thatEverythingIsOk() {
 
-        RoleEntity adminRole = RoleEntity.builder().name("Admin").build();
+        RoleEntity adminRole = RoleEntity.builder()
+            .name("Admin")
+            .build();
         Set<RoleEntity> roleEntities = new HashSet<>();
         roleEntities.add(adminRole);
 

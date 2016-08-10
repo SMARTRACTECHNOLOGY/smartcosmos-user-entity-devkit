@@ -44,6 +44,7 @@ We therefore provide our own AllArgsConstructor that is used by the generated bu
     @ConstructorProperties({ "authority" })
     protected AuthorityEntity(
         String authority) {
+
         this.authority = authority;
     }
 }

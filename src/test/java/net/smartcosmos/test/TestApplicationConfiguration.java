@@ -10,6 +10,7 @@ public class TestApplicationConfiguration {
 
     @Bean
     PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 }

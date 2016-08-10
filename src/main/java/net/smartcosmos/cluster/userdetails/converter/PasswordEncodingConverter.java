@@ -16,16 +16,19 @@ public class PasswordEncodingConverter implements AttributeConverter<String, Str
 
     @Override
     public String convertToDatabaseColumn(String rawPassword) {
+
         return (StringUtils.isNotBlank(rawPassword) ? passwordEncoder.encode(rawPassword) : rawPassword);
     }
 
     @Override
     public String convertToEntityAttribute(String encodedPassword) {
+
         return encodedPassword;
     }
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+
         PasswordEncodingConverter.passwordEncoder = passwordEncoder;
     }
 }

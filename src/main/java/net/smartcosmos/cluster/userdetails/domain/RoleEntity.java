@@ -110,6 +110,7 @@ public class RoleEntity {
         Set<UserEntity> users,
         Set<AuthorityEntity> authorities,
         Boolean active) {
+
         this.id = id;
         this.tenantId = tenantId;
         this.name = name;
