@@ -14,9 +14,8 @@ import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
 /**
  * Initially created by SMART COSMOS Team on June 30, 2016.
  */
-public interface RoleRepository extends JpaRepository<RoleEntity, String>,
-                                        PagingAndSortingRepository<RoleEntity, String>,
-                                        JpaSpecificationExecutor<RoleEntity> {
+public interface RoleRepository
+        extends JpaRepository<RoleEntity, String>, PagingAndSortingRepository<RoleEntity, String>, JpaSpecificationExecutor<RoleEntity> {
 
     Optional<RoleEntity> findByTenantIdAndNameIgnoreCase(UUID tenantId, String name);
 

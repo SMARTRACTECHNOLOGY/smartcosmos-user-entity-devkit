@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan
 @Configuration
 public class UserDetailsPersistenceConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter {
-    
+
 }

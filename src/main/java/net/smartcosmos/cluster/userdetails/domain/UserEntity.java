@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,17 +25,17 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import net.smartcosmos.cluster.userdetails.converter.PasswordEncodingConverter;
 
@@ -43,7 +44,7 @@ import net.smartcosmos.cluster.userdetails.converter.PasswordEncodingConverter;
 @Data
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 // this will be the future, but currently isn't supported:
-//@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = { "username", "tenantId" }))
+// @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = { "username", "tenantId" }))
 @EntityListeners({ AuditingEntityListener.class })
 public class UserEntity implements Serializable {
 
@@ -52,11 +53,11 @@ public class UserEntity implements Serializable {
     private static final int BIG_STRING_FIELD_LENGTH = 767;
 
     /*
-        Without setting an appropriate Hibernate naming strategy, the column names specified in the @Column annotations below will be converted
-        from camel case to underscore, e.g.: systemUuid -> system_uuid
-
-        To avoid that, select the "old" naming strategy org.hibernate.cfg.EJB3NamingStrategy in your configuration (smartcosmos-ext-objects-rdao.yml):
-        jpa.hibernate.naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
+     * Without setting an appropriate Hibernate naming strategy, the column names specified in the @Column annotations below will be converted
+     * from camel case to underscore, e.g.: systemUuid -> system_uuid
+     * 
+     * To avoid that, select the "old" naming strategy org.hibernate.cfg.EJB3NamingStrategy in your configuration (smartcosmos-ext-objects-rdao.yml):
+     * jpa.hibernate.naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
      */
 
     @Id
@@ -95,9 +96,7 @@ public class UserEntity implements Serializable {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "user_roles",
-               joinColumns = { @JoinColumn(name = "user") },
-               inverseJoinColumns = { @JoinColumn(name = "role") })
+    @JoinTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user") }, inverseJoinColumns = { @JoinColumn(name = "role") })
     private Set<RoleEntity> roles;
 
     @CreatedDate
@@ -116,26 +115,16 @@ public class UserEntity implements Serializable {
     private Boolean active;
 
     /*
-        Lombok's @Builder is not able to deal with field initialization default values. That's a known issue which won't get fixed:
-        https://github.com/rzwitserloot/lombok/issues/663
-
-        We therefore provide our own AllArgsConstructor that is used by the generated builder and takes care of field initialization.
+     * Lombok's @Builder is not able to deal with field initialization default values. That's a known issue which won't get fixed:
+     * https://github.com/rzwitserloot/lombok/issues/663
+     * 
+     * We therefore provide our own AllArgsConstructor that is used by the generated builder and takes care of field initialization.
      */
     @Builder
-    @ConstructorProperties({ "id", "tenantId", "username", "emailAddress", "givenName", "surname", "password", "roles",
-                             "created", "lastModified", "active" })
-    protected UserEntity(
-        UUID id,
-        UUID tenantId,
-        String username,
-        String emailAddress,
-        String givenName,
-        String surname,
-        String password,
-        Set<RoleEntity> roles,
-        Date created,
-        Date lastModified,
-        Boolean active) {
+    @ConstructorProperties({ "id", "tenantId", "username", "emailAddress", "givenName", "surname", "password", "roles", "created", "lastModified",
+            "active" })
+    protected UserEntity(UUID id, UUID tenantId, String username, String emailAddress, String givenName, String surname, String password,
+            Set<RoleEntity> roles, Date created, Date lastModified, Boolean active) {
 
         this.id = id;
         this.tenantId = tenantId;

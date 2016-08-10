@@ -1,26 +1,25 @@
 package net.smartcosmos.cluster.userdetails.repository;
 
-import net.smartcosmos.cluster.userdetails.UserDetailsPersistenceConfig;
-import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
-import net.smartcosmos.test.TestApplicationConfiguration;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.Assert.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.junit.*;
+import org.junit.runner.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.junit.Assert.*;
+import net.smartcosmos.cluster.userdetails.UserDetailsPersistenceConfig;
+import net.smartcosmos.cluster.userdetails.domain.RoleEntity;
+import net.smartcosmos.test.TestApplicationConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { UserDetailsPersistenceConfig.class, TestApplicationConfiguration.class})
+@SpringApplicationConfiguration(classes = { UserDetailsPersistenceConfig.class, TestApplicationConfiguration.class })
 @ActiveProfiles("test")
 @WebAppConfiguration
 public class RoleRepositoryTest {

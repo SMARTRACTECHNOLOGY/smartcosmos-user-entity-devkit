@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.transaction.TransactionException;
@@ -20,7 +21,7 @@ public interface UserRepositoryCustom {
      * @param entity the user entity to persist
      * @return the persisted user entity
      * @throws ConstraintViolationException if the transaction fails due to violated constraints
-     * @throws TransactionException         if the transaction fails because of something else
+     * @throws TransactionException if the transaction fails because of something else
      */
     UserEntity persist(UserEntity entity) throws ConstraintViolationException, TransactionException;
 
