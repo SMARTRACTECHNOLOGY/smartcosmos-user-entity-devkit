@@ -11,10 +11,10 @@
         <groupId>net.smartcosmos</groupId>
         <artifactId>smartcosmos-framework-parent</artifactId>
         <version>3.0.0</version>
-        <relativePath></relativePath>
+        <relativePath />
     </parent>
     <artifactId>smartcosmos-user-entity-devkit</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1-SNAPSHOT</version>
     <name>SMART COSMOS USER DAO Entities and Services</name>
     <description>Devkit implementation of User mananagement entities and data layer</description>
 
@@ -57,7 +57,7 @@
         <connection>scm:git:ssh://git@github.com/SMARTRACTECHNOLOGY/smartcosmos-user-entity-devkit.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/SMARTRACTECHNOLOGY/smartcosmos-user-entity-devkit.git</developerConnection>
         <url>https://github.com/SMARTRACTECHNOLOGY/smartcosmos-user-entity-devkit/tree/master/</url>
-        <tag>v3.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
 </project>
