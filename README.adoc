@@ -1,0 +1,9 @@
+= SMART COSMOS DevKit User Entities
+SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
+:version: 3.0.0-SNAPSHOT
+ifdef::env-github[:USER: SMARTRACTECHNOLOGY]
+ifdef::env-github[:REPO: smartcosmos-user-entity-devkit]
+ifdef::env-github[:BRANCH: master]
+
+== Copyright and License
+Code and documentation copyright 2016 Smartrac Technology Fletcher, Inc.  Code released under link:LICENSE[Apache 2.0 License].
