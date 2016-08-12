@@ -5,5 +5,7 @@ ifdef::env-github[:USER: SMARTRACTECHNOLOGY]
 ifdef::env-github[:REPO: smartcosmos-user-entity-devkit]
 ifdef::env-github[:BRANCH: master]
 
+Shared library for working with users in devkit services.
+
 == Copyright and License
 Code and documentation copyright 2016 Smartrac Technology Fletcher, Inc.  Code released under link:LICENSE[Apache 2.0 License].
