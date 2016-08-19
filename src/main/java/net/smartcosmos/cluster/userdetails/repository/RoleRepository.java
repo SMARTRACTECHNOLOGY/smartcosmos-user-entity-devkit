@@ -1,7 +1,9 @@
 package net.smartcosmos.cluster.userdetails.repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +23,8 @@ public interface RoleRepository extends JpaRepository<RoleEntity, String>,
     Optional<RoleEntity> findByTenantIdAndNameIgnoreCase(UUID tenantId, String name);
 
     Optional<RoleEntity> findByTenantIdAndId(UUID tenantId, UUID id);
+
+    Set<RoleEntity> findByTenantIdAndNameInAllIgnoreCase(UUID tenantId, Collection<String> names);
 
     @Transactional
     List<RoleEntity> deleteByTenantIdAndId(UUID tenantId, UUID id);
