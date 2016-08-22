@@ -25,6 +25,4 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID>,
 
     Optional<UserEntity> findByUsernameIgnoreCase(String username);
 
-    Optional<UserEntity> findByUsernameAndPassword(String username, String password);
-
 }
