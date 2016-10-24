@@ -7,6 +7,8 @@ ifdef::env-github[:BRANCH: master]
 
 image::https://travis-ci.org/{USER}/{REPO}.svg?branch={BRANCH}[Build Status, link=https://travis-ci.org/{USER}/{REPO}]
 
+image::https://jenkins.smartcosmos.net/buildStatus/icon?job={USER}/{REPO}/{BRANCH}[Build Status, link=https://jenkins.smartcosmos.net/job/{USER}/job/{REPO}/job/{BRANCH}/]
+
 Shared library for working with users in devkit services.
 
 == Copyright and License
