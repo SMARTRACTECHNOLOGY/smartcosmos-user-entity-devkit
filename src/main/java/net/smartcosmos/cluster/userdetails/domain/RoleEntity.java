@@ -63,7 +63,7 @@ public class RoleEntity {
 
     @NotEmpty
     @Size(max = STRING_FIELD_LENGTH)
-    @Column(name = "name", length = STRING_FIELD_LENGTH, nullable = false, updatable = false)
+    @Column(name = "name", length = STRING_FIELD_LENGTH, nullable = false, updatable = true)
     private String name;
 
     @Size(max = STRING_FIELD_LENGTH)
